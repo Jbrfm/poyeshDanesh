@@ -1,0 +1,57 @@
+<div class="loading" *ngIf="isloading">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8 offset-2">
+        <h4>ثبت برچسب</h4>
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-11">
+            <form [formGroup]="addFrom">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>عنوان برچسب</label>
+                        <input nz-input formControlName="title" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button nz-button nzType="primary" (click)="onSubmit()" style="width: auto;">ثبت</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr>
+<hr>
+
+<div class="row" *ngIf="tags">
+    <div class="col-md-8 offset-2">
+        <h4>حذف برچسب</h4>
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-11">
+            <form [formGroup]="deleteForm">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>عنوان برچسب</label>
+                        <nz-select style="width: 100%;" nzShowSearch formControlName="id">
+                            <nz-option *ngFor="let tag of tags" [nzValue]="tag.value" [nzLabel]="tag.label"></nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button nz-button nzType="primary" nzDanger (click)="onDelete()"
+                            style="width: auto;">حذف</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

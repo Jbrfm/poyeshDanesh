@@ -1,0 +1,22 @@
+<div class="loading" *ngIf="isLoading">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<nz-table *ngIf="reports" #basicTable [nzData]="reports" [nzPageSize]="7">
+    <thead>
+        <tr>
+            <th>عنوان اصلی</th>
+            <th>عنوان فرعی</th>
+            <th>گزارش‌دهنده</th>
+            <th>چکیده</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.title }}</td>
+            <td>{{ data.tree }}</td>
+            <td>{{ data.reporter }}</td>
+            <td [innerHTML]="data.abstract"></td>
+        </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,143 @@
+<div class="loading" *ngIf="!(treeLoaded && reporterLoaded) || isLoading ">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row" *ngIf="treeLoaded && reporterLoaded">
+    <div class="col-md-8 offset-2">
+        <h4>ثبت تجربه</h4>
+    </div>
+    <div class="row" style="justify-content: centPer;">
+        <div class="col-md-11">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>محور تجربه</label>
+                        <nz-select style="width: 100%;" formControlName="title" nzShowSearch>
+                            <nz-option *ngFor="let title of titleOptions" [nzValue]="title.value"
+                                [nzLabel]="title.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>عنوان تجربه</label>
+                        <nz-select style="width: 100%;" formControlName="subject" nzShowSearch
+                            [nzDisabled]="!form.controls['title'].valid">
+                            <nz-option *ngFor="let subject of subjectOptions" [nzValue]="subject.value"
+                                [nzLabel]="subject.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span class="bi bi-person-vcard"></span>
+                        <label>گزارش دهنده</label>
+                        <nz-select style="width: 100%;" formControlName="user" nzShowSearch>
+                            <nz-option *ngFor="let user of reporters" [nzValue]="user.value"
+                                [nzLabel]="user.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-1 datepicker-wrapper">
+                        <span nz-icon nzType="calendar" nzTheme="outline"></span>
+                        <label>تاریخ حصول</label>
+                        <br>
+                        <ng-persian-datepicker dateFormat="YYYY-MM-DD">
+                            <input nz-input formControlName="experience_date" style="cursor: pointer;" />
+                        </ng-persian-datepicker>
+                    </div>
+                    <br class="mt-4">
+                    <div class="col-11 mb-2">
+                        <span class="bi bi-card-text"></span>
+                        <label>علت ثبت تجربه</label>
+                        <angular-editor [config]="editorConfigReason" formControlName="reason"></angular-editor>
+                    </div>
+                    <br class="mt-4">
+                    <div class="col-11 mb-2">
+                        <span class="bi bi-card-text"></span>
+                        <label>نقطه تصمیم‌گیری</label>
+                        <angular-editor [config]="editorConfigDecision" formControlName="decision"></angular-editor>
+                    </div>
+                    <br class="mt-4">
+                    <div class="col-11 mb-2">
+                        <span class="bi bi-card-text"></span>
+                        <label>شرح تجربه</label>
+                        <angular-editor [config]="editorConfig" formControlName="description"></angular-editor>
+                    </div>
+                    <br class="mt-4">
+                    <div class="col-11 mb-2">
+                        <span class="bi bi-card-text"></span>
+                        <label>دستاوردهای تجربه</label>
+                        <angular-editor [config]="editorConfig" formControlName="achievement"></angular-editor>
+                    </div>
+
+                    <br class="mt-2">
+                    <div class="col-md-10 offset-2 mb-2">
+                        <label>نوع تجربه</label>
+                        <br>
+                        <nz-radio-group formControlName="is_success">
+                            <label nz-radio [nzValue]="true">موفق</label>
+                            <label nz-radio [nzValue]="false">ناموفق</label>
+                        </nz-radio-group>
+                    </div>
+                    <div class="col-md-5 mb-2">
+                        <span nz-icon nzType="tags" nzTheme="outline"></span>
+                        <label>کلیدواژه‌ها و برچسب‌ها</label>
+                        <nz-select style="width: 100%;" nzShowSearch nzMode="multiple" formControlName="selectedTags">
+                            <nz-option *ngFor="let tag of tags" [nzValue]="tag.value" [nzLabel]="tag.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <!-- <hr>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span class="bi bi-card-image"></span>
+                        <label>آپلود تصویر</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadImage" [(nzFileList)]="imageFileList" nzFileType="image/png,image/jpeg,image/gif,image/bmp" nzAccept="image/png,image/jpeg,image/gif,image/bmp">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="video-camera" nzTheme="outline"></span>
+                        <label class="mb-1">آپلود فیلم</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadMovie" [nzFileList]="movieFileList" nzFileType="video/mp4,video/x-m4v,video/*" nzAccept="video/mp4,video/x-m4v,video/*">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="sound" nzTheme="outline"></span>
+                        <label>آپلود صدا</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadSound" [nzFileList]="soundFileList" nzAccept="audio/*">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="file-text" nzTheme="outline"></span>
+                        <label>آپلود فایل پیوست</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadDocument" [nzFileList]="documentFileList">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div> -->
+                    <div class="col-12 d-flex justify-content-end mb-4" style="gap:10px;">
+                        <!-- <button nz-button nzType="default" style="width: auto;">ذخیره به عنوان پیش‌نویس</button> -->
+                        <button nz-button nzType="default" nzDanger style="width: auto;"
+                            (click)="onReset()">انصراف</button>
+                        <button nz-button style="width:auto" (click)="onPrint()">پرینت</button>
+                        <button nz-button nzType="primary" style="width: auto;" (click)="onSubmit()">ثبت تجربه</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

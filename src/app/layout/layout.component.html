@@ -1,0 +1,86 @@
+<div class="loading" *ngIf="isLoading ">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="my-container">
+    <nz-layout style="z-index: 3;">
+        <nz-header nzTheme="light" class="header">
+            <div class="header-container">
+                <div class="image-container">
+                    <img src="assets/images/2.png" alt="">
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <h1 style="color: red; font-family: nast;">مستند سازی فرایند شکل گیری و تکوین شهر جدید مهستان</h1>
+                </div>
+                <div class="image-container">
+                    <img src="assets/images/1.png" alt="">
+                </div>
+            </div>
+        </nz-header>
+        <nz-layout>
+            <nz-sider nzCollapsible nzTheme="light" [(nzCollapsed)]="isCollapsed" nzBreakpoint="lg"
+                [nzCollapsedWidth]="0">
+                <span class="btn my-trigger" (click)="isCollapsed=!isCollapsed">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </span>
+
+                <ul nz-menu dir="rtl" nzMode="inline">
+                    <li class="li" nz-menu-item routerLink="experience" routerLinkActive="active">
+                        <span nz-icon nzType="edit" nzTheme="outline"></span>
+                        <span>ثبت تجربیات</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="report" routerLinkActive="active">
+                        <span nz-icon nzType="plus-square" nzTheme="outline"></span>
+                        <span>ثبت گزارشات</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="knowledge" routerLinkActive="active">
+                        <span nz-icon nzType="database" nzTheme="outline"></span>
+                        <span>پایگاه دانش</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="experienceList" routerLinkActive="active">
+                        <span nz-icon nzType="bars" nzTheme="outline"></span>
+                        <span>لیست تجربیات</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="reportsList" routerLinkActive="active">
+                        <span nz-icon nzType="bars" nzTheme="outline"></span>
+                        <span>لیست گزارشات</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="knowledgeList" routerLinkActive="active">
+                        <span nz-icon nzType="bars" nzTheme="outline"></span>
+                        <span>لیست پایگاه دانش</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="tags" routerLinkActive="active">
+                        <span nz-icon nzType="tags" nzTheme="outline"></span>
+                        <span>کلیدواژه‌ها و برچسب‌ها</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="addReporter" routerLinkActive="active">
+                        <span nz-icon nzType="user" nzTheme="outline"></span>
+                        <span>گزارش دهنده</span>
+                    </li>
+                    <li class="li" nz-menu-item routerLink="setting" routerLinkActive="active">
+                        <span nz-icon nzType="setting" nzTheme="outline"></span>
+                        <span>تنظیمات</span>
+                    </li>
+                    <li class="li text-danger" nz-menu-item (click)="logout()">
+                        <span nz-icon nzType="logout" nzTheme="outline"></span>
+                        <span>خروج</span>
+                    </li>
+                </ul>
+            </nz-sider>
+            <nz-layout class="inner-layout">
+                <nz-content>
+                    <router-outlet></router-outlet>
+                </nz-content>
+            </nz-layout>
+        </nz-layout>
+        <nz-footer>
+            <div class="d-flex justify-content-center" style="flex-direction: column;">
+                <span>کلیه حقوق برای مهندسین مشاور پویش جامع محفوظ است</span>
+            </div>
+        </nz-footer>
+    </nz-layout>
+
+    <div class="my-backGround">
+        <img src="assets/images/backGround.jpg" alt="">
+    </div>
+</div>

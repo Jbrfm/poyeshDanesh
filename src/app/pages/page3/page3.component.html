@@ -1,0 +1,38 @@
+<div class="loading" *ngIf="isloading">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h4>آپلود فایل‌ها</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-11">
+            <form [formGroup]="form">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>محور تجربه</label>
+                        <nz-select style="width: 100%;" formControlName="title" nzShowSearch>
+                            <nz-option *ngFor="let title of requests" [nzValue]="title.id"
+                                [nzLabel]="title.title"></nz-option>
+                        </nz-select>
+                    </div>
+                    <br>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="video-camera" nzTheme="outline"></span>
+                        <label class="mb-1">آپلود</label>
+                        <br>
+                        <nz-upload [nzFileList]="movieFileList" [nzDisabled]="!form.controls['title'].valid" [nzCustomRequest]="customUpload">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

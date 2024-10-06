@@ -1,0 +1,91 @@
+<div class="loading" *ngIf="isLoading">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8 offset-2">
+        <h4>اضافه کردن گزارش‌دهنده</h4>
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-11">
+            <form [formGroup]="reporterForm">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="user" nzTheme="outline"></span>
+                        <label>نام</label>
+                        <input nz-input formControlName="first_name" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="team" nzTheme="outline"></span>
+                        <label>نام خانواگی</label>
+                        <input nz-input formControlName="last_name" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="solution" nzTheme="outline"></span>
+                        <label>سمت مصاحبه شونده</label>
+                        <input nz-input formControlName="position" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="idcard" nzTheme="outline"></span>
+                        <label>کد ملی</label>
+                        <input nz-input formControlName="national_code" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>مدرک تحصیلی</label>
+                        <br>
+                        <nz-select style="width: 100%;" nzShowSearch formControlname="evidence">
+                            <nz-option *ngFor="let item of evidenceList" [nzLabel]="item" [nzValue]="item"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="phone" nzTheme="outline"></span>
+                        <label> شماره همراه </label>
+                        <input nz-input formControlName="phone" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="mail" nzTheme="outline"></span>
+                        <label>ایمیل</label>
+                        <input nz-input formControlName="email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button nz-button nzType="primary" (click)="onAddReporter()" style="width: auto;">ثبت</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr>
+<hr>
+
+<div class="row" *ngIf="reporters">
+    <div class="col-md-8 offset-2">
+        <h4>حذف گزارش‌دهنده</h4>
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-11">
+            <form [formGroup]="removeReporterForm">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label>گزارش دهنده</label>
+                        <nz-select style="width: 100%;" nzShowSearch formControlName="reporterId">
+                            <nz-option *ngFor="let reporter of reporters" [nzValue]="reporter.value"
+                                [nzLabel]="reporter.label"></nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button nz-button nzType="primary" nzDanger (click)="onDeleteUser()"
+                            style="width: auto;">حذف</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

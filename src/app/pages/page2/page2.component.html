@@ -1,0 +1,113 @@
+<div class="loading" *ngIf="!nodes">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row" *ngIf="nodes">
+    <div class="col-md-8 offset-2">
+        <h4>ثبت گزارشات</h4>
+    </div>
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-11">
+            <form [formGroup]="reportForm">
+                <div class="row mb-4">
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label class="px-2 mb-1">محور گزارش</label>
+                        <nz-select style="width: 100%;" formControlName="title" nzShowSearch>
+                            <nz-option *ngFor="let title of titleOptions" [nzValue]="title.value"
+                                [nzLabel]="title.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span nz-icon nzType="book" nzTheme="outline"></span>
+                        <label class="control-label mb-1 px-2">عنوان گزارش</label>
+                        <br>
+                        <nz-select style="width: 100%;" formControlName="subject" nzShowSearch
+                            [nzDisabled]="!reportForm.controls['title'].valid">
+                            <nz-option *ngFor="let subject of subjectOptions" [nzValue]="subject.value"
+                                [nzLabel]="subject.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-11 mb-4">
+                        <span class="bi bi-card-text"></span>
+                        <label class="px-2 mb-1">ثبت گزارش</label>
+                        <angular-editor [config]="editorConfig" formControlName="report_text"></angular-editor>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4">
+                        <span class="bi bi-person-vcard"></span>
+                        <label class="px-2 mb-1">گزارش دهنده</label>
+                        <nz-select style="width: 100%;" formControlName="user" nzShowSearch>
+                            <nz-option *ngFor="let user of reporters" [nzValue]="user.value"
+                                [nzLabel]="user.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <span nz-icon nzType="tags" nzTheme="outline"></span>
+                        <label class="px-2 mb-1">کلیدواژه‌ها و برچسب‌ها</label>
+                        <nz-select style="width: 100%;" nzShowSearch nzMode="multiple" formControlName="selectedTags">
+                            <nz-option *ngFor="let tag of tags" [nzValue]="tag.value" [nzLabel]="tag.label"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-11 mb-2">
+                        <span class="bi bi-card-text"></span>
+                        <label class="px-2 mb-1">چکیده گزارش</label>
+                        <angular-editor [config]="editorConfig" formControlName="abstract"></angular-editor>
+                    </div>
+                    <!-- <hr>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span class="bi bi-card-image"></span>
+                        <label>آپلود تصویر</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadImage" [(nzFileList)]="imageFileList" nzFileType="image/png,image/jpeg,image/gif,image/bmp" nzAccept="image/png,image/jpeg,image/gif,image/bmp">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="video-camera" nzTheme="outline"></span>
+                        <label class="mb-1">آپلود فیلم</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadMovie" [nzFileList]="movieFileList" nzFileType="video/mp4,video/x-m4v,video/*" nzAccept="video/mp4,video/x-m4v,video/*">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="sound" nzTheme="outline"></span>
+                        <label>آپلود صدا</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadSound" [nzFileList]="soundFileList" nzAccept="audio/*">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div>
+                    <div class="col-md-5 offset-1 mb-4 p-2 border">
+                        <span nz-icon nzType="file-text" nzTheme="outline"></span>
+                        <label>آپلود فایل پیوست</label>
+                        <br>
+                        <nz-upload [nzBeforeUpload]="beforeUploadDocument" [nzFileList]="documentFileList">
+                            <button nz-button>
+                                <span nz-icon nzType="upload"></span>
+                                آپلود
+                            </button>
+                        </nz-upload>
+                    </div> -->
+                </div> 
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end mb-4" style="gap: 10px;">
+                        <button nz-button nzType="default" nzDanger style="width: auto;"
+                            (click)="onReset()">انصراف</button>
+                        <button nz-button style="width:auto" (click)="onPrint()">پرینت</button>
+                        <button nz-button nzType="primary" (click)="onReportSubmit()" style="width: auto;">ثبت</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

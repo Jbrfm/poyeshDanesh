@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/font-awesome/css/font-awesome.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+* {
+  font-family: "sahel";
+}
+
+// persian deatepicker
+:root {
+  --input-height: 46px;
+  --input-vertical-margin: 16px;
+}
+
+body {
+  font-family: 'IranSansWebRegular', serif;
+}
+
+label, h4, span {
+  font-weight: 900;
+}
+
+span {
+  margin: 0 5px 5px 5px;
+}
+
+input {
+  font-family: inherit;
+
+  &[type="text"] {
+    &:not(.browser-default) {
+      box-sizing: border-box;
+      margin: 0;
+      height: var(--input-height);
+    }
+  }
+}
+
+.input-field {
+  margin-top: var(--input-vertical-margin);
+  margin-bottom: var(--input-vertical-margin);
+}
+
+.datepicker-wrapper {
+  position: relative;
+
+  ng-persian-datepicker .datepicker-outer-container {
+    position: absolute;
+    z-index: 1;
+    top: calc(var(--input-height) + var(--input-vertical-margin));
+    right: 0;
+    left: 0;
+  }
+}

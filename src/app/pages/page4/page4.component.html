@@ -1,0 +1,24 @@
+<div class="loading" *ngIf="isloading">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<nz-table *ngIf="listOfData" #basicTable [nzData]="listOfData" [nzPageSize]="7">
+    <thead>
+        <tr>
+            <th>عنوان اصلی</th>
+            <th>عنوان فرعی</th>
+            <th>گزارش‌دهنده</th>
+            <th>تاریخ</th>
+            <th>علت</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.title }}</td>
+            <td>{{ data.subject }}</td>
+            <td>{{ data.reporter }}</td>
+            <td>{{ data.experience_date }}</td>
+            <td [innerHTML]="data.reason">  </td>
+        </tr>
+    </tbody>
+</nz-table>

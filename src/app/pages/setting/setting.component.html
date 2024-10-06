@@ -1,0 +1,31 @@
+<div class="loading" *ngIf="isLoading ">
+    <nz-spin nzSimple nzSize="large" nzTip="در حال بارگزاری"></nz-spin>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h4>تنظیمات</h4>
+    </div>
+    <div class="row" style="justify-content: centPer;">
+        <div class="col-md-11">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="key" nzTheme="outline"></span>
+                        <label>رمز</label>
+                        <input nz-input formControlName="new_password1" />
+                    </div>
+                    <div class="col-md-5 offset-1 mb-1">
+                        <span nz-icon nzType="key" nzTheme="outline"></span>
+                        <label>تایید رمز</label>
+                        <input nz-input formControlName="new_password2" />
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mt-4 mb-4" style="gap:10px;">
+                        <button nz-button nzType="default" nzDanger style="width: auto;" (click)="onReset()">انصراف</button>
+                        <button nz-button nzType="primary" style="width: auto;" (click)="onSubmit()">تغییر رمز</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
